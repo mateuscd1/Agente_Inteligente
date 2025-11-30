@@ -1,6 +1,28 @@
 {% extends "core/base.html" %}
-{% block title %}Home{% endblock %}
+
+{% block title %}Página Inicial — Agente Inteligente{% endblock %}
+
 {% block content %}
-<h1>Agente Inteligente — PPG UEMA</h1>
-<p>Página inicial — em desenvolvimento</p>
+<section class="hero">
+  <h2>Bem-vindo ao Agente Inteligente — PPG UEMA</h2>
+  <p>Use o agente para buscar informações, resumir documentos e tirar dúvidas sobre editais e atividades da PPG.</p>
+  <div class="cta">
+    <a class="btn" href="{% url 'chat' %}">Conversar com o Agente</a>
+    <a class="btn ghost" href="{% url 'register' %}">Registrar-se | Técnico PPG</a>
+  </div>
+</section>
+
+<section class="info-cards">
+  <article class="card">
+    <h3>Como funciona</h3>
+    <p>Envie documentos e pergunte ao agente. Ele usa indexação e LLM para responder com base nos documentos.</p>
+  </article>
+  <article class="card">
+    <h3>Exemplos de perguntas</h3>
+    <ul>
+      <li>O edital “mais pesquisa” já está disponível?</li>
+      <li>Quais são as datas importantes do PPG?</li>
+    </ul>
+  </article>
+</section>
 {% endblock %}

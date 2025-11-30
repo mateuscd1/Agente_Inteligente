@@ -14,6 +14,10 @@ A Pró-Reitoria de Pesquisa e Pós-Graduação (PPG) da UEMA (Universidade Estad
 
 A princípio o sistema será desenvolvido em Python, com uso de banco de dados PostgreSQL, Django para integração de interface Web  e integração com modelos de linguagem (transformers) para consulta semântica e geração de documentação. Utiliza GitHub/GitLab para versionamento e automação CI/CD.
 
+# Página estrutura
+
+![Descrição da Imagem](assets/pagina_incial_prototipo.png)
+
 # Modelagem Conceitual 
 
 Entidades principais:
@@ -24,7 +28,7 @@ Entidades principais:
 - Programa (id, nome, nível, área, coordenador)
 
 
-- Usuário (id, nome, função, login, tipo_acesso)
+- UsuárioPPG (id, nome, cpf, identificador , email, senha)
 
 
 - FluxoAprovacao (id, etapa, responsável, status)
@@ -49,6 +53,7 @@ Entidades principais:
 │   ├── 📁 templates
 │   │   └── 📁 core
 │   │       ├── 🌐 base.html
+│   │       ├── 🌐 chat.html
 │   │       ├── 🌐 document_detail.html
 │   │       ├── 🌐 home.html
 │   │       ├── 🌐 login.html
@@ -72,7 +77,10 @@ Entidades principais:
 ├── 📁 static
 │   ├── 📁 css
 │   │   └── 🎨 style.css
-│   └── 📁 img
+│   ├── 📁 img
+│   │   └── 🖼️ ppguema.png
+│   └── 📁 js
+│       └── 📄 chat.js
 ├── ⚙️ .env.example
 ├── ⚙️ .gitignore
 ├── 🖼️ Página_Inicial_Desenvolvimento.png
@@ -80,3 +88,4 @@ Entidades principais:
 ├── 🐍 manage.py
 └── 📄 requirements.txt
 ```
+

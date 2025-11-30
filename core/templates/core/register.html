@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% block title %}Registrar — Agente Inteligente{% endblock %}
+
+{% block content %}
+<section class="register">
+  <h2>Registro para usuário PPG</h2>
+  <form method="post" id="register-form">
+    <!-- CSRF e fields serão adicionados pelo backend quando implementar -->
+    <label>
+      Nome
+      <input type="text" name="nome" placeholder="Digite seu nome" required>
+    </label>
+
+    <label>
+      CPF
+      <input type="text" name="cpf" placeholder="000.000.000-00" required>
+    </label>
+
+    <label>
+      Identificador
+      <input type="text" name="identificador" placeholder="Ex: matrícula / ID" required>
+    </label>
+
+    <label>
+      Email
+      <input type="email" name="email" placeholder="seu@email.com" required>
+    </label>
+
+    <label>
+      Senha
+      <input type="password" name="password" placeholder="Senha" required>
+    </label>
+
+    <div>
+      <button type="submit" class="btn">Registrar</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

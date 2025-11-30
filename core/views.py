@@ -20,3 +20,6 @@ def search_view(request):
 
 def resumo_view(request, pk):
     return render(request, 'core/resumo.html', {'pk': pk})
+
+def chat(request):
+    return render(request, 'core/chat.html')

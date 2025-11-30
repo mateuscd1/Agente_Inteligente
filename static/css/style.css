@@ -1,5 +1,58 @@
-body { font-family: Arial, sans-serif; margin: 0; padding: 0 1rem; }
-header { background:#222; color: #fff; padding: 0.5rem 1rem; }
-nav a { color: #fff; margin-right: 0.8rem; text-decoration: none; }
-main { padding: 1rem 0; }
-footer { margin-top: 2rem; color: #666; font-size: 0.9rem; }
+:root{
+  --accent:#2c6bed;
+  --bg:#f7f8fb;
+  --muted:#666;
+  --card:#fff;
+  --radius:10px;
+}
+
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, Arial, Helvetica, sans-serif; margin:0; background:var(--bg); color:#222}
+.container{max-width:1000px; margin:0 auto; padding:1rem}
+.site-header{background:#9cb9ee; color:white}
+.header-inner{display:flex; justify-content:space-between; align-items:center; padding:1rem}
+.logo a{color:white; text-decoration:none; font-weight:700}
+.main-nav a{color:#212652; margin-left:1rem; text-decoration:none; font-weight: bold;}
+
+.hero{background:linear-gradient(90deg,#9cb9ee, #eef6ff); padding:2rem; border-radius:12px; margin:1rem 0}
+.hero h2{margin:0 0 .5rem}
+.cta .btn{display:inline-block; margin-right:.5rem; padding:.6rem 1rem; background:var(--accent); color:white; border-radius:8px; text-decoration:none}
+.cta .btn.ghost{background:transparent; color:var(--accent); border:1px solid var(--accent)}
+
+.info-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin-top:1rem}
+.card{background:var(--card); padding:1rem; border-radius:var(--radius); box-shadow:0 6px 18px rgba(145, 169, 218, 0.06)}
+
+.chat-app{margin:1rem 0}
+.chat-window{height:420px; background:white; border-radius:12px; padding:1rem; overflow:auto; border:1px solid #e7eefb}
+.msg{padding:.6rem; margin-bottom:.6rem; border-radius:8px; max-width:80%}
+.msg.system{background:#f0f6ff; color:#123}
+.msg.user{background:#dff7e7; margin-left:auto}
+.msg.bot{background:#f2f4ff}
+
+.chat-form{display:flex; gap:.6rem; margin-top:.8rem}
+.chat-form input{flex:1; padding:.8rem; border-radius:8px; border:1px solid #ddd}
+.btn{background:var(--accent); color:white; padding:.6rem 1rem; border-radius:8px; border:none; cursor:pointer}
+.register label{display:block; margin-bottom:.7rem}
+.register input{width:100%; padding:.6rem; border-radius:8px; border:1px solid #ddd}
+
+
+/* LOGO + TÍTULO NO MENU SUPERIOR */
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo-img {
+  height: 50px;  /* ajuste conforme quiser */
+  width: auto;
+}
+
+.logo-text a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+

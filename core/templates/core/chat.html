@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% block title %}Conversar com o Agente — Agente Inteligente{% endblock %}
+
+{% block content %}
+<section class="chat-app">
+  <h2>Chat de Conversa</h2>
+
+  <div id="chat-window" class="chat-window" aria-live="polite">
+    
+    <div class="msg system">Pergunte alguma coisa</div>
+  </div>
+
+  <form id="chat-form" class="chat-form" onsubmit="return false;">
+    <input id="chat-input" placeholder="Digite sua pergunta..." autocomplete="off" />
+    <button id="chat-send" class="btn">Enviar</button>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  
+</script>
+{% endblock %}
