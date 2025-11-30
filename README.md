@@ -16,7 +16,7 @@ A princípio o sistema será desenvolvido em Python, com uso de banco de dados P
 
 # Página estrutura
 
-![Descrição da Imagem](assets/pagina_incial_prototipo.png)
+![Descrição da Imagem](assets/pagina_inicial_prototipo.png)
 
 # Modelagem Conceitual 
 
