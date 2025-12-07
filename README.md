@@ -14,9 +14,16 @@ A Pró-Reitoria de Pesquisa e Pós-Graduação (PPG) da UEMA (Universidade Estad
 
 A princípio o sistema será desenvolvido em Python, com uso de banco de dados PostgreSQL, Django para integração de interface Web  e integração com modelos de linguagem (transformers) para consulta semântica e geração de documentação. Utiliza GitHub/GitLab para versionamento e automação CI/CD.
 
-# Página estrutura
+# Estrutura Página
+
+- Página Inicial
 
 ![Descrição da Imagem](assets/pagina_inicial_prototipo.png)
+
+- Página de conversa com Agente Inteligente
+
+![Descrição da Imagem](assets/pagina_conversa.png)
+
 
 # Modelagem Conceitual 
 
