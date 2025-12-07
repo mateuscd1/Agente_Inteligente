@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Entrar — Usuário PPG{% endblock %}
+
+{% block content %}
+<section class="login-section">
+  <div class="login-card">
+    <h2>Entrar — Usuário PPG</h2>
+
+    {% if form.errors %}
+      <div class="alert error">
+        Usuário ou senha inválidos. Tente novamente.
+      </div>
+    {% endif %}
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Usamos o LoginView padrão do Django que espera 'username' e 'password' -->
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+
+      <label for="id_username">CPF</label>
+      <input id="id_username" class="form-input" type="text" name="username" placeholder="000.000.000-00" required autofocus>
+
+      <label for="id_password">Senha</label>
+      <input id="id_password" class="form-input" type="password" name="password" placeholder="Senha" required>
+
+      <div class="form-row">
+        <button type="submit" class="btn">Entrar</button>
+        <a class="link" href="{% url 'register' %}">Criar conta</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

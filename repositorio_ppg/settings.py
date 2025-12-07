@@ -41,6 +41,11 @@ MEDIA_ROOT = BASE_DIR / "media"
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 
+# REDIRECIONAMENTOS DE LOGIN/LOGOUT
+LOGIN_REDIRECT_URL = '/'        # para onde o usuário é levado após o login
+LOGOUT_REDIRECT_URL = '/'       # após logout
+
+
 
 
 # Application definition

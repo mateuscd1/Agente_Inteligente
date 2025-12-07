@@ -56,3 +56,80 @@ body{font-family:Inter, system-ui, Arial, Helvetica, sans-serif; margin:0; backg
   font-weight: 700;
 }
 
+/* LOGIN */
+
+/* LOGIN */
+/* ===== Login / Register shared style ===== */
+.login-section {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0;
+}
+
+.login-card {
+  background: white;
+  padding: 1.6rem 1.8rem;
+  border-radius: 10px;
+  width: 420px;
+  box-shadow: 0 8px 24px rgba(10,20,40,.06);
+  border: 1px solid rgba(10,20,40,0.04);
+}
+
+.login-card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+}
+
+/* Inputs compartilhados */
+.form-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #e3e8ef;
+  background: #fafbfc;
+  font-size: 0.95rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* labels */
+.login-card label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* row with submit + link */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* botão principal */
+.login-card .btn{
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* link secundário */
+.login-card .link{
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+/* mensagens de erro */
+.alert { padding: .6rem .8rem; border-radius:6px; margin-bottom:.6rem; font-size:.95rem; }
+.alert.error { background:#ffecec; color:#900; border:1px solid #f5c6c6; }
+
+
+
