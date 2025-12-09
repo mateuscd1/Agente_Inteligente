@@ -2,36 +2,62 @@
 {% block title %}Registrar — Agente Inteligente{% endblock %}
 
 {% block content %}
-<section class="register">
+<section class="register container" style="max-width:800px;margin:2rem auto;">
   <h2>Registro para usuário PPG</h2>
-  <form method="post" id="register-form">
-    <!-- CSRF e fields serão adicionados pelo backend quando implementar -->
-    <label>
-      Nome
-      <input type="text" name="nome" placeholder="Digite seu nome" required>
-    </label>
 
-    <label>
-      CPF
-      <input type="text" name="cpf" placeholder="000.000.000-00" required>
-    </label>
+  {% if messages %}
+    {% for m in messages %}
+      <div class="alert {{ m.tags }}">{{ m }}</div>
+    {% endfor %}
+  {% endif %}
 
-    <label>
-      Identificador
-      <input type="text" name="identificador" placeholder="Ex: matrícula / ID" required>
-    </label>
+  {# mostrar erros não associados a um campo (ex: senha mismatch) #}
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+      {{ form.non_field_errors }}
+    </div>
+  {% endif %}
 
-    <label>
-      Email
-      <input type="email" name="email" placeholder="seu@email.com" required>
-    </label>
+  <form method="post" id="register-form" action="{% url 'register' %}">
+    {% csrf_token %}
 
-    <label>
-      Senha
-      <input type="password" name="password" placeholder="Senha" required>
-    </label>
+    <div class="form-row">
+      <label for="{{ form.first_name.id_for_label }}">Nome</label>
+      {{ form.first_name }}
+      {{ form.first_name.errors }}
+    </div>
 
-    <div>
+    <div class="form-row">
+      <label for="{{ form.last_name.id_for_label }}">Identificador</label>
+      {{ form.last_name }}
+      {{ form.last_name.errors }}
+    </div>
+
+    <div class="form-row">
+      <label for="{{ form.cpf.id_for_label }}">CPF</label>
+      {{ form.cpf }}
+      {{ form.cpf.errors }}
+    </div>
+
+    <div class="form-row">
+      <label for="{{ form.email.id_for_label }}">Email</label>
+      {{ form.email }}
+      {{ form.email.errors }}
+    </div>
+
+    <div class="form-row">
+      <label for="{{ form.password.id_for_label }}">Senha</label>
+      {{ form.password }}
+      {{ form.password.errors }}
+    </div>
+
+    <div class="form-row">
+      <label for="{{ form.password2.id_for_label }}">Confirmar Senha</label>
+      {{ form.password2 }}
+      {{ form.password2.errors }}
+    </div>
+
+    <div style="margin-top:1rem;">
       <button type="submit" class="btn">Registrar</button>
     </div>
   </form>
