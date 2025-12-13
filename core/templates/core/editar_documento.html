@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% block title %}Editar Documento{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width:600px;margin:20px auto;">
+  <h2>Editar Título do Documento</h2>
+  
+  <form method="post" class="form-edit">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="titulo">Novo título:</label>
+      <input type="text" name="titulo" class="form-control" value="{{ documento.titulo }}" required>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{% url 'upload' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

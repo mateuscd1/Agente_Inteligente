@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block title %}Excluir Documento{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width:600px;margin:20px auto;">
+  <h2>Confirmar Exclusão</h2>
+
+  <p>Tem certeza que deseja excluir o documento:</p>
+  <h4><strong>{{ documento.titulo }}</strong></h4>
+
+  <form method="post" class="form-delete">
+    {% csrf_token %}
+    
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+      <a href="{% url 'upload' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

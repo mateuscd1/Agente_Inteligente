@@ -7,8 +7,12 @@
   <h2>Bem-vindo ao Agente Inteligente — PPG UEMA</h2>
   <p>Use o agente para buscar informações, resumir documentos e tirar dúvidas sobre editais e atividades da PPG.</p>
   <div class="cta">
+    {% if user.is_authenticated %}
+    <a class="btn" href="{% url 'chat' %}">Conversar com o Agente</a>
+    {% else %}
     <a class="btn" href="{% url 'chat' %}">Conversar com o Agente</a>
     <a class="btn ghost" href="{% url 'register' %}">Registrar-se | Técnico PPG</a>
+    {% endif %}
   </div>
 </section>
 

@@ -19,6 +19,7 @@
 
         {% if user.is_authenticated %}
           <span>Olá, {{ user.first_name }}</span>
+          <a href="{% url 'home' %}">Menu</a>
           <a href="{% url 'upload' %}">Enviar Arquivos</a>
           <a href="{% url 'logout' %}">Sair</a>
         {% else %}

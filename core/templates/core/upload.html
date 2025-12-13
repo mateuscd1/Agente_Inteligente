@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+{% block title %}Upload de Documentos{% endblock %}
+
+{% block content %}
+<h2>Upload de Documentos</h2>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+<form method="post" enctype="multipart/form-data" class="upload-form">
+  {% csrf_token %}
+  
+  <div class="form-group">
+    <label for="titulo">Título do documento:</label>
+    <input type="text" id="titulo" name="titulo" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="arquivo">Arquivo (PDF):</label>
+    <input type="file" id="arquivo" name="arquivo" accept="application/pdf" class="form-control" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<hr>
+
+<h3>Meus documentos enviados</h3>
+
+{% if documentos %}
+  <ul class="document-list">
+    {% for doc in documentos %}
+      <li class="document-item">
+        <strong>{{ doc.titulo }}</strong><br>
+        Enviado em: {{ doc.criado_em|date:"d/m/Y H:i" }}<br>
+
+        <a href="{{ doc.arquivo.url }}" target="_blank">Abrir arquivo</a> |
+        <a href="{% url 'editar_documento' doc.id %}">Editar</a> |
+        <a href="{% url 'excluir_documento' doc.id %}">Excluir</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Nenhum documento enviado ainda.</p>
+{% endif %}
+
+{% endblock %}

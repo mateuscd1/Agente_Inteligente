@@ -61,44 +61,63 @@ def register_view(request):
 
 @login_required
 def upload_view(request):
-    # apenas Uploader
+    # apenas técnicos aprovados
     if not request.user.groups.filter(name='Uploader').exists():
-        return HttpResponseForbidden("Apenas técnicos aprovados podem enviar documentos.")
+        return HttpResponseForbidden("Apenas técnicos PPG podem enviar documentos.")
 
-    if request.method == 'POST':
-        titulo = request.POST.get('titulo') or request.POST.get('title') or ''
-        arquivo = request.FILES.get('arquivo')
+    if request.method == "POST":
+        titulo = request.POST.get("titulo")
+        arquivo = request.FILES.get("arquivo")
+
         if not titulo or not arquivo:
-            messages.error(request, "Preencha título e selecione arquivo.")
-            return redirect('upload')
-        doc = Documento.objects.create(
+            messages.error(request, "Preencha o título e selecione um arquivo.")
+            return redirect("upload")
+
+        Documento.objects.create(
             titulo=titulo,
             arquivo=arquivo,
             criado_por=request.user
         )
-        # extrair texto (sincronamente aqui, ou criar tarefa async depois)
-        try:
-            from .utils import extract_text_from_pdf
-            texto = extract_text_from_pdf(doc.arquivo.path)
-            doc.texto_extraido = texto
-            doc.save()
-        except Exception as e:
-            # logar erro
-            print("Erro extração:", e)
-        messages.success(request, "Documento enviado.")
-        return redirect('upload')
 
-    documentos = Documento.objects.filter(criado_por=request.user).order_by('-criado_em')
-    return render(request, 'core/upload.html', {'documentos': documentos})
+        messages.success(request, "Documento enviado com sucesso!")
+        return redirect("upload")
+
+    documentos = Documento.objects.filter(criado_por=request.user).order_by("-criado_em")
+
+    return render(request, "core/upload.html", {
+        "documentos": documentos
+    })
 
 @login_required
-def delete_document(request, pk):
-    if request.method == 'POST':
-        doc = get_object_or_404(Documento, pk=pk, criado_por=request.user)
-        doc.arquivo.delete(save=False)
-        doc.delete()
-        messages.success(request, "Documento excluído.")
-    return redirect('upload')
+def editar_documento(request, doc_id):
+    documento = get_object_or_404(Documento, id=doc_id, criado_por=request.user)
+
+    if request.method == "POST":
+        novo_titulo = request.POST.get("titulo")
+        if novo_titulo:
+            documento.titulo = novo_titulo
+            documento.save()
+            messages.success(request, "Título atualizado com sucesso.")
+            return redirect("upload")
+
+    return render(request, "core/editar_documento.html", {
+        "documento": documento
+    })
+
+
+@login_required
+def excluir_documento(request, doc_id):
+    documento = get_object_or_404(Documento, id=doc_id, criado_por=request.user)
+
+    if request.method == "POST":
+        documento.arquivo.delete()  # remove o arquivo físico
+        documento.delete()          # remove do banco
+        messages.success(request, "Documento excluído com sucesso.")
+        return redirect("upload")
+
+    return render(request, "core/excluir_documento.html", {
+        "documento": documento
+    })
 
 def document_detail(request, pk):
     return render(request, 'core/document_detail.html', {'pk': pk})

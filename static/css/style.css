@@ -133,3 +133,169 @@ body{font-family:Inter, system-ui, Arial, Helvetica, sans-serif; margin:0; backg
 
 
 
+/* ESTILO PARA UPLOAD DE ARQUIVOS PARA USUÁRIO PPG*/
+
+.upload-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.upload-form .form-group {
+  margin-bottom: 15px;
+}
+
+.upload-form label {
+  font-weight: bold;
+}
+
+.upload-form .form-control {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.upload-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para a lista de documentos */
+.document-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.document-item {
+  margin-bottom: 15px;
+}
+
+.document-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.document-item a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para alertas de mensagens */
+.alert {
+  background-color: #eaf7ff;
+  border: 1px solid #b3d6ff;
+  color: #0066cc;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Estilos para o formulário de edição */
+.form-edit {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #007bff;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e6ea;
+}
+
+
+/* Estilos para a página de exclusão */
+.form-delete {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #007bff;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e6ea;
+}
