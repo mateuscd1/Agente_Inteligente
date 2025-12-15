@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Documento(models.Model):
     titulo = models.CharField(max_length=255)
     arquivo = models.FileField(upload_to='documentos/')
+    texto_extraido = models.TextField(blank=True, null=True)
     criado_por = models.ForeignKey(User, on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True)
 

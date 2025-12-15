@@ -19,33 +19,34 @@ document.addEventListener('DOMContentLoaded', function(){
     e.preventDefault();
     const text = chatInput.value.trim();
     if(!text) return;
+
     appendMessage(text, 'user');
     chatInput.value = '';
     sendBtn.disabled = true;
 
     try {
-      // tenta chamar endpoint real
-      const resp = await fetch('/api/chat/', {
+      const resp = await fetch('/chat/api/', {
         method:'POST',
-        headers:{ 'Content-Type':'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        headers:{ 
+          'Content-Type':'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
         body: JSON.stringify({ message: text })
       });
+
       if(resp.ok){
         const data = await resp.json();
-        appendMessage(data.reply || 'Sem resposta', 'bot');
+        appendMessage(data.response || 'Sem resposta', 'bot');
       } else {
-        // se o endpoint não existir, usa fallback
-        appendMessage('Desculpe — serviço de chat não disponível (ainda).', 'bot');
+        appendMessage('Erro ao acessar o servidor.', 'bot');
       }
     } catch(err){
-      // fallback offline
-      appendMessage('Resposta simulada: 🤖 Ainda não há backend — implemente /api/chat/ para receber perguntas.', 'bot');
+      appendMessage('Backend não respondeu.', 'bot');
     } finally {
       sendBtn.disabled = false;
     }
   });
 
-  // pega csrf cookie (para POSTs no Django)
   function getCookie(name) {
     let v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return v ? v[2] : null;

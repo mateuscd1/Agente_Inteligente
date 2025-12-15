@@ -10,6 +10,55 @@ from django.contrib.auth import authenticate, login
 import re
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from .utils import extrair_texto_pdf
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+# IA 
+from core.ia.chunking import chunk_text
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from core.models import Documento
+from core.ia.context_builder import build_context
+from core.ia.generator import generate_answer
+
+
+@csrf_exempt
+def chat_api(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Método não permitido"}, status=405)
+
+    data = json.loads(request.body)
+    pergunta = data.get("message", "").strip()
+
+    if not pergunta:
+        return JsonResponse({"response": "Pergunta vazia."})
+
+    documentos = Documento.objects.exclude(texto_extraido__isnull=True)\
+                                  .exclude(texto_extraido="")
+
+    if not documentos.exists():
+        return JsonResponse({
+            "response": "Nenhum documento foi indexado ainda."
+        })
+
+    from core.ia.context_builder import build_context
+    from core.ia.generator import generate_answer
+
+    # 🔹 AQUI ESTÁ A CORREÇÃO PRINCIPAL
+    contexto = build_context(pergunta)
+
+    resposta = generate_answer(
+        pergunta=pergunta,
+        contexto=contexto
+    )
+
+    return JsonResponse({"response": resposta})
+
+
+
 
 def home(request):
     return render(request, 'core/home.html')
@@ -59,9 +108,9 @@ def register_view(request):
         form = RegisterForm()
     return render(request, 'core/register.html', {'form': form})
 
+
 @login_required
 def upload_view(request):
-    # apenas técnicos aprovados
     if not request.user.groups.filter(name='Uploader').exists():
         return HttpResponseForbidden("Apenas técnicos PPG podem enviar documentos.")
 
@@ -73,20 +122,38 @@ def upload_view(request):
             messages.error(request, "Preencha o título e selecione um arquivo.")
             return redirect("upload")
 
-        Documento.objects.create(
+        documento = Documento.objects.create(
             titulo=titulo,
             arquivo=arquivo,
             criado_por=request.user
         )
 
+        caminho_pdf = documento.arquivo.path
+
+        # ✅ Extrair texto do PDF
+        texto = extrair_texto_pdf(caminho_pdf)
+
+        if not texto.strip():
+            messages.error(request, "Não foi possível extrair texto do documento.")
+            documento.delete()
+            return redirect("upload")
+
+        # ✅ Salvar texto no banco
+        documento.texto_extraido = texto
+        documento.save()
+
         messages.success(request, "Documento enviado com sucesso!")
         return redirect("upload")
 
-    documentos = Documento.objects.filter(criado_por=request.user).order_by("-criado_em")
+    documentos = Documento.objects.filter(
+        criado_por=request.user
+    ).order_by("-criado_em")
 
     return render(request, "core/upload.html", {
         "documentos": documentos
     })
+
+
 
 @login_required
 def editar_documento(request, doc_id):

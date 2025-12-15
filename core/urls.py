@@ -14,7 +14,7 @@ urlpatterns = [
     # outras rotas...
     path("documento/<int:doc_id>/editar/", views.editar_documento, name="editar_documento"),
     path("documento/<int:doc_id>/excluir/", views.excluir_documento, name="excluir_documento"),
-
+    path("chat/api/", views.chat_api, name="chat_api"),
 
     
 ]

@@ -1,10 +1,13 @@
 import pdfplumber
 
-def extract_text_from_pdf(path):
-    texts = []
-    with pdfplumber.open(path) as pdf:
-        for page in pdf.pages:
-            text = page.extract_text()
-            if text:
-                texts.append(text)
-    return "\n".join(texts)
+def extrair_texto_pdf(caminho_pdf):
+    texto = ""
+
+    try:
+        with pdfplumber.open(caminho_pdf) as pdf:
+            for pagina in pdf.pages:
+                texto += pagina.extract_text() or ""
+    except Exception as e:
+        texto = f"Erro ao extrair texto: {str(e)}"
+
+    return texto

@@ -1,27 +1,32 @@
-﻿# Python / Django
-*.pyc
+﻿# Python
 __pycache__/
-db.sqlite3
+*.py[cod]
+*.pyo
 
-# env
-.env
-.venv/
+# Ambiente virtual
 venv/
-ENV/
+.env
 
-# Django / uploads
-documentos/
-media/
-static_root/
+# Django
+db.sqlite3
 staticfiles/
+media/
 
-# IDEs
+# IDE
 .vscode/
 .idea/
 
-# OS
+# Logs
+*.log
+
+# Sistema
 .DS_Store
 Thumbs.db
 
-# logs
-*.log
+# Modelos / dados locais
+*.pkl
+*.pt
+*.bin
+
+# PDFs enviados
+media/pdfs/
