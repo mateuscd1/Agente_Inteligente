@@ -1,11 +1,17 @@
-# 🧠 Agente Inteligente — PPG UEMA  
-Sistema Web para suporte às atividades do Programa de Pós-Graduação da UEMA.
+# 🤖 Agente Inteligente – PPG UEMA
 
-O projeto tem como objetivo auxiliar estudantes e pesquisadores na busca de informações, envio de documentos e interação com um **agente inteligente** (IA) baseado em modelos de linguagem (LLMs), utilizando RAG (Retrieval-Augmented Generation).
+Sistema web inteligente desenvolvido para auxiliar o Programa de Pós-Graduação da UEMA (PPG/UEMA) na **consulta, análise e compreensão de documentos acadêmicos**, como editais, regulamentos e documentos institucionais, utilizando **Processamento de Linguagem Natural (PLN)** e **Inteligência Artificial**.
 
 ---
 
-# Estrutura Página
+## 📌 Visão Geral do Projeto
+
+O **Agente Inteligente – PPG UEMA** permite que usuários realizem perguntas em linguagem natural sobre documentos em PDF previamente enviados ao sistema.  
+O agente extrai o texto dos documentos, constrói um contexto relevante e utiliza um **modelo de linguagem via Groq Cloud** para gerar respostas claras, objetivas e baseadas exclusivamente no conteúdo dos documentos.
+
+---
+
+## 🖥️ Visão das Principais Telas
 
 - Página Inicial
 
@@ -15,138 +21,93 @@ O projeto tem como objetivo auxiliar estudantes e pesquisadores na busca de info
 
 ![Descrição da Imagem](assets/pagina_conversa.png)
 
-## 🚀 Funcionalidades Atuais
+---
 
-### 👤 **1. Registro de Técnico PPG**
-- Cadastro através de formulário com validação (nome, CPF, identificador, e-mail e senha).
-- CPF é utilizado como **username** (somente dígitos).
-- Usuários recém-registrados ficam com:
-  - `is_active = False`
-  - pertencentes ao grupo `Pending`
-- Somente administradores podem aprovar contas.
+## 🎯 Objetivos
+
+### Objetivo Geral
+Desenvolver um agente inteligente capaz de apoiar usuários do PPG/UEMA na consulta e interpretação de documentos acadêmicos de forma automatizada.
+
+### Objetivos Específicos
+- Permitir upload e gerenciamento de documentos PDF
+- Extrair texto automaticamente dos documentos
+- Fragmentar (chunking) textos extensos para melhor análise
+- Construir contexto relevante para perguntas dos usuários
+- Gerar respostas utilizando modelos de linguagem (LLMs)
+- Garantir controle de acesso por tipo de usuário
+- Disponibilizar uma interface web simples e intuitiva
 
 ---
 
-### 🔐 **2. Login & Logout**
-- Login realizado via CPF + senha.
-- Após login bem-sucedido, o sistema exibe:
-  - saudação com o nome do usuário
-  - acesso restrito a recursos especiais (ex.: upload)
-  - botão “Sair”
-- Logout implementado com comportamento limpo e funcional.
+## 🧠 Funcionalidades Principais
+
+- Autenticação de usuários (Login e Registro)
+- Upload de documentos PDF
+- Extração automática de texto
+- Construção de contexto a partir de múltiplos documentos
+- Chat interativo com o agente inteligente
+- Respostas baseadas **somente** nos documentos enviados
+- Integração com a **Groq Cloud API**
+- Interface web
 
 ---
 
-### 🗂️ **3. Controle de Acesso por Grupos**
-Grupos utilizados:
-- **Pending** → Usuários aguardando aprovação
-- **Uploader** → Técnicos aprovados pelo administrador
-- **Leitor** → Futuro grupo para usuários sem permissão de upload
+## 🏗️ Arquitetura do Sistema
 
-A aprovação é feita no Django Admin:
-- marca `is_active=True`
-- adiciona ao grupo **Uploader**
-
-Apenas usuários Uploader conseguem acessar `/upload/`.
+Usuário → Interface Web → Django (Backend) → Módulo de IA → Resposta ao Usuário
 
 ---
 
-### 💬 **4. Chat com o Agente Inteligente (interface pronta)**
-- Interface completa do chat já está implementada.
-- Backend ainda será conectado ao módulo de IA.
+## 🛠️ Tecnologias Utilizadas
+
+### Backend
+- Python
+- Django
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Inteligência Artificial
+- Groq Cloud API
+- Modelo: `llama-3.1-8b-instant`
+
+### Banco de Dados
+- SQLite
 
 ---
 
-### 📄 **5. Design Responsivo e Integrado**
-- Página inicial, login, registro e chat estilizados com CSS puro.
-- Layout limpo, intuitivo e pronto para apresentação.
-
----
-
-## 🧩 Tecnologias Utilizadas
-
-| Camada | Tecnologia |
-|--------|------------|
-| Backend | Django 5.x (Python) |
-| Banco de Dados | SQLite (desenvolvimento) |
-| Front-end | HTML + CSS + JavaScript |
-| Autenticação | Django Auth + Groups |
-| IA (futuro) | HuggingFace Transformers + RAG |
-| Versionamento | Git & GitHub |
-
----
-
-## 🔧 Instalação e Execução do Projeto
-
-### 1️⃣ Clonar o repositório
-```bash
-git clone https://github.com/mateuscd1/Agente_Inteligente.git
-cd Agente_Inteligente
-```
-
-```
-python -m venv venv
-
-venv/Scripts/activate     # Windows
-
-source venv/bin/activate  # Linux/Mac
-
-pip install -r requirements.txt
-```
-```
-pip install -r requirements.txt
-```
-```
-python manage.py migrate
-```
-```
-python manage.py createsuperuser
-```
-```
-python manage.py runserver
-```
-
-## 🔐 Fluxo Completo do Técnico PPG
-
-
-**1. Usuário acessa /register/ e envia seus dados.**
-
-**2. O sistema cria o usuário com:**
-- username = CPF (somente dígitos)
-
-- is_active = False
-
-- grupo = Pending
-
-**3. Administrador acessa /admin/, vai em Users:**
-
-- ativa o usuário (is_active = True)
-
-- o adiciona ao grupo Uploader
-
-**4. Técnico faz login normalmente e obtém acesso à área restrita (ex.: /upload/).**
-
-## 🧱 Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
 ```
 ├── 📁 assets
 │   ├── 🖼️ Página_Inicial_Desenvolvimento.png
 │   ├── 🖼️ pagina_conversa.png
 │   └── 🖼️ pagina_inicial_prototipo.png
+├── 📁 codigoSQL
+│   └── 📄 script.sql
 ├── 📁 core
+│   ├── 📁 ia
+│   │   ├── 🐍 chunking.py
+│   │   ├── 🐍 context_builder.py
+│   │   ├── 🐍 generator.py
+│   │   ├── 🐍 groq_client.py
+│   │   └── 🐍 retriever.py
 │   ├── 📁 management
 │   │   ├── 📁 commands
 │   │   │   ├── 🐍 __init__.py
 │   │   │   └── 🐍 create_groups.py
 │   │   └── 🐍 __init__.py
 │   ├── 📁 migrations
-│   │   ├── 🐍 0001_initial.py
 │   │   └── 🐍 __init__.py
 │   ├── 📁 templates
 │   │   └── 📁 core
 │   │       ├── 🌐 base.html
 │   │       ├── 🌐 chat.html
 │   │       ├── 🌐 document_detail.html
+│   │       ├── 🌐 editar_documento.html
+│   │       ├── 🌐 excluir_documento.html
 │   │       ├── 🌐 home.html
 │   │       ├── 🌐 login.html
 │   │       ├── 🌐 register.html
@@ -163,6 +124,8 @@ python manage.py runserver
 │   ├── 🐍 urls.py
 │   ├── 🐍 utils.py
 │   └── 🐍 views.py
+├── 📁 documentacao
+│   └── 📘 Documentação_Projeto_Agente_Inteligente_PPG.docx
 ├── 📁 repositorio_ppg
 │   ├── 🐍 __init__.py
 │   ├── 🐍 asgi.py
@@ -182,22 +145,76 @@ python manage.py runserver
 ├── 🐍 manage.py
 └── 📄 requirements.txt
 ```
-## 🧑‍💻 Contribuição
 
-Contribuições são bem-vindas!
+---
 
-- 1 - Faça um fork do projeto
+## ⚙️ Configuração do Ambiente
 
-- 2 - Crie uma branch (git checkout -b feature-nome)
+1. Criar ambiente virtual  
+2. Instalar dependências  
+3. Configurar variável de ambiente `GROQ_API_KEY`  
+4. Executar o servidor Django
 
-- 3 - Commit e push
+---
 
-- 4 - Abra um Pull Request
+## ▶️ Executando o Projeto
+
+```bash
+git clone github.com/mateuscd1/Agente_Inteligente
+
+#Criar ambiente virtual
+python -m venv venv
+
+# Windows ativar ambiente
+venv/Scripts/activate   
+
+#LINUX/MACOS ativar ambiente
+source venv/bin/activate
+
+#Instalar dependências
+pip install -r requirements.txt
+
+#Configurar variável de ambiente (Groq API)
+#Windows (PowerShell)
+setx GROQ_API_KEY "SUA_CHAVE_AQUI"
+
+Linux / macOS
+export GROQ_API_KEY="SUA_CHAVE_AQUI"
+
+
+python manage.py migrate
+python manage.py runserver
+```
+
+---
+
+## 🔐 Segurança
+
+- Chaves de API via variáveis de ambiente
+- `.env` e banco local ignorados no Git
+- Controle de acesso por perfil
+
+---
+
+## 🚀 Trabalhos Futuros
+
+- Ranking semântico de trechos
+- Histórico de conversas
+- Dashboard administrativo
+- Deploy em produção
+- Integração com Banco PostgreSQL
+- FrameWork para Fron-End Robusto
+
+---
+
+## 👨‍🎓 Autor
+
+João Mateus Dutra
+
+Curso: Engenharia de Computação – UEMA
+
+Projeto acadêmico desenvolvido para fins educacionais.
 
 ## 📄 Licença
 
-Projeto desenvolvido para fins acadêmicos (UEMA — Programa de Pós-Graduação).
-
-## 🧠 Autor
-
-João Mateus Dutra — Aluno de graduação de Engenharia de Computação da UEMA | Desenvolvedor do Agente Inteligente – PPG UEMA.
+Este projeto é de uso acadêmico e educacional
